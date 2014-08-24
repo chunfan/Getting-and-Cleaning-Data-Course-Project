@@ -1,34 +1,56 @@
 # Code Book for Tidy Data Extracted from UCI HAR Dataset
 
-This tidy dataset is extracted and processed from UCI HAR Dataset. 
+This tidy dataset is extracted and processed from [UCI HAR Dataset](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones). 
 
 ## Original Dataset: UCI HAR Dataset
 The original dataset contains 561 features (input variables), 1 activity label (output variable) and 1 subject ID for each data points in both training set (7352 data points) and test set (2947 data points). The details of the dataset are described in **README.txt** and **features_info.txt** in the original dataset.
 
 ## Data Processing
 The tidy dataset was formed from processing the original data from UCI HAR dataset. The processing was performed using an R script **run_analysis.R**. Below details the processing step carried out in the script.
+
 1. **featureName**, which contains the name of the input variables, were read from **features.txt**.
+
 2. **activityLabels**, which contains the list of names used in the output variables (labels), were read from **activity_label.txt**.
+
 3. **trainingDataX**, which contains the input feature values from the training dataset, were read from **x_train.txt**.
+
 4. **trainingDataY**, which contains the output labels from the training dataset, were read from **y_train.txt**.
+
 5. **trainingSubject**, which contains the subject identity in the training dataset, were read from **subject_train.txt".
-3. **testDataX**, which contains the input feature values from the test dataset, were read from **x_test.txt**.
-4. **testDataY**, which contains the output labels from the test dataset, were read from **y_test.txt**.
-5. **testSubject**, which contains the subject identity in the test dataset, were read from **subject_test.txt".
-6. The variables **trainingDataY** and **testDataY** use integer code to represent the activity. To make the variables more descriptive, the integer code were replaced by activity name (in character) contained in **activityLabels**.
-7. **trainingDataX** and **testDataX** were stacked vertically. 
-8. **trainingDataY** and **testDataY** were stacked vertically. 
-9. **trainingSubject** and **testSubject** were stacked vertically. 
-10. The stacked **trainingSubject** and **testSubject**, **trainingDataX** and **testDataX**; and stacked **trainingDataY** and **testDataY** were combined horizontally to form the new data frame, **data**.
-11. The columns of the new data frame were named as "subject", 561 feature names in **featureName** and "activity", respectively.
-12. Extracts columns in which their feature name contain "mean" and "std".
-13. Replace the data frame, **data** with new data frame with only the extracted columns.
-14. Split **data** according to both subject ID (in Column "subject" of **data**) and activity (in Column "activity" of **data**) into a list of 180 data frames, **S**. Each data frame contains data for a particular activity generated from a particular subject. For example, data frame 1 in **S** contains data from Subject 1 doing activity "LAYING".
-15. For each data frame in list **s**, mean values were calculated for each column of input features. 
-16. A new list of data frames, **meanS** were formed from the column mean values for each activity and subject.
-17. The feature name for each column of all the data frames in **meanS** were appended with ".average".
-18. A data frame, **tidyData** is formed by combining all data frames in **meanS**. To indicate their origin, two columns "subject" and "activity" which indicates the respective subject ID and activity were added to the tidy data.
-19. The tidy dataset, **tidyData** were written into a .txt file named **tidyData.txt**.
+
+6. **testDataX**, which contains the input feature values from the test dataset, were read from **x_test.txt**.
+
+7. **testDataY**, which contains the output labels from the test dataset, were read from **y_test.txt**.
+
+8. **testSubject**, which contains the subject identity in the test dataset, were read from **subject_test.txt".
+
+9. The variables **trainingDataY** and **testDataY** use integer code to represent the activity. To make the variables more descriptive, the integer code were replaced by activity name (in character) contained in **activityLabels**.
+
+10. **trainingDataX** and **testDataX** were stacked vertically. 
+
+11. **trainingDataY** and **testDataY** were stacked vertically. 
+
+12. **trainingSubject** and **testSubject** were stacked vertically. 
+
+13. The stacked **trainingSubject** and **testSubject**, **trainingDataX** and **testDataX**; and stacked **trainingDataY** and **testDataY** were combined horizontally to form the new data frame, **data**.
+
+14. The columns of the new data frame were named as "subject", 561 feature names in **featureName** and "activity", respectively.
+
+15. Extracts columns in which their feature name contain "mean" and "std".
+
+16. Replace the data frame, **data** with new data frame with only the extracted columns.
+
+17. Split **data** according to both subject ID (in Column "subject" of **data**) and activity (in Column "activity" of **data**) into a list of 180 data frames, **S**. Each data frame contains data for a particular activity generated from a particular subject. For example, data frame 1 in **S** contains data from Subject 1 doing activity "LAYING".
+
+18. For each data frame in list **s**, mean values were calculated for each column of input features. 
+
+19. A new list of data frames, **meanS** were formed from the column mean values for each activity and subject.
+
+20. The feature name for each column of all the data frames in **meanS** were appended with ".average".
+
+21. A data frame, **tidyData** is formed by combining all data frames in **meanS**. To indicate their origin, two columns "subject" and "activity" which indicates the respective subject ID and activity were added to the tidy data.
+
+22. The tidy dataset, **tidyData** were written into a .txt file named **tidyData.txt**.
 
 ## Variables
 The resulting **tidyData** contains 81 features and 180 rows. 
